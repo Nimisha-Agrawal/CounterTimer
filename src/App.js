@@ -4,6 +4,7 @@ import "./assets/css/style.css";
 
 export default function App() {
   const [count, setCount] = useState(0);
+  const [toggle,setToggle] = useState(true);
   let intervalID = useRef(null);
 
   useEffect(() => {
@@ -14,18 +15,25 @@ export default function App() {
       setCount((prevCount) => prevCount + 1);
   };
   
+  const updateToggle = () => {
+     setToggle(!toggle);
+  }
+  
   const startTimer = () => {
     increment();
     intervalID.current = setInterval(increment, 1000);
+    updateToggle();
   };
 
   const pauseTimer = () => {
     intervalID.current && clearInterval(intervalID.current);
+    updateToggle();
   };
 
   const resetTimer = () => {
     pauseTimer();
     setCount(0);
+    setToggle(true);
   };
 
   return (
@@ -37,8 +45,8 @@ export default function App() {
         </div>
         <div class="buttons">
           <Button
-            title={count === 0 ? "Start" : "Pause"}
-            action={count === 0 ? startTimer : pauseTimer}
+            title={toggle ? "Start" : "Pause"}
+            action={toggle ? startTimer : pauseTimer}
           />
           <Button title={"Reset"} action={resetTimer} />
         </div>
