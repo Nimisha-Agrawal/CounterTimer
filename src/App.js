@@ -33,7 +33,6 @@ export default function App() {
   const resetTimer = () => {
     pauseTimer();
     setCount(0);
-    setToggle(true);
   };
 
   return (
