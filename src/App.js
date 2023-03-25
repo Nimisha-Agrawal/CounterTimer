@@ -10,10 +10,13 @@ export default function App() {
     return resetTimer;
   }, []);
 
-  const startTimer = () => {
-    intervalID.current = setInterval(() => {
+  const increment = () => {
       setCount((prevCount) => prevCount + 1);
-    }, 1000);
+  };
+  
+  const startTimer = () => {
+    increment();
+    intervalID.current = setInterval(increment, 1000);
   };
 
   const pauseTimer = () => {
